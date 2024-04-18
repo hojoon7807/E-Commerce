@@ -1,0 +1,12 @@
+spring :
+  application:
+    name: e-commerce
+
+  profiles:
+    group:
+      local:
+        - flyway
+        - localdb
+      test:
+        - flyway
+    active: local
