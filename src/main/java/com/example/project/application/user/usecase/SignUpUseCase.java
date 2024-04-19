@@ -1,4 +1,4 @@
-package com.example.project.application.usecase;
+package com.example.project.application.user.usecase;
 
 import com.example.project.domain.user.model.User;
 import java.util.function.Function;
