@@ -21,8 +21,8 @@ public class SecurityConfig {
     http
         .sessionManagement(sessionManager -> sessionManager
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-        .authorizeHttpRequests((authorize) -> authorize
-            .requestMatchers("/signup", "/login", "/actuator/**", "/", "/error").permitAll()
+        .authorizeHttpRequests(authorize -> authorize
+            .requestMatchers("/signup", "/auth/login", "/actuator/**", "/", "/error").permitAll()
             .anyRequest().authenticated()
         )
         .httpBasic(AbstractHttpConfigurer::disable)
