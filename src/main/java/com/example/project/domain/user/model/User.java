@@ -42,6 +42,10 @@ public class User extends BaseTime {
   @Enumerated(EnumType.STRING)
   private UserStatus userStatus;
 
+  public boolean isApproved() {
+    return userStatus.equals(UserStatus.APPROVED);
+  }
+
   @Builder
   public User(Long userId, String username, String password, String email, String phoneNum,
       UserRole userRole, UserStatus userStatus) {
