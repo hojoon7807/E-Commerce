@@ -17,6 +17,10 @@ logging:
 jwt:
   secret: e-commerce-secret-key-for-local-project
 
+encryptor:
+  password: ecommerce-password
+  salt: deadbeef
+
 management:
   endpoints:
     web:
