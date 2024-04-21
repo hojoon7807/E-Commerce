@@ -22,7 +22,7 @@ public class User extends BaseTime {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long userId;
 
-  @Column(nullable = false, columnDefinition = "char(10)")
+  @Column(nullable = false, columnDefinition = "char(50)")
   private String username;
 
   @Column(nullable = false)
@@ -31,7 +31,7 @@ public class User extends BaseTime {
   @Column(nullable = false)
   private String email;
 
-  @Column(nullable = false, columnDefinition = "char(13)")
+  @Column(nullable = false, columnDefinition = "char(24)")
   private String phoneNum;
 
   @Column(nullable = false, columnDefinition = "varchar")
