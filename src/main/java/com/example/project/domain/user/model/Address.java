@@ -26,7 +26,7 @@ public class Address {
   @JoinColumn(name = "user_id")
   private User user;
 
-  @Column(nullable = false, columnDefinition = "char(5)")
+  @Column(nullable = false, columnDefinition = "char(24)")
   private String zipcode;
 
   @Column(nullable = false)
