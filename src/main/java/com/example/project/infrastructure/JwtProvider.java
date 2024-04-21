@@ -1,6 +1,8 @@
 package com.example.project.infrastructure;
 
 import com.example.project.domain.user.model.User;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -49,5 +51,22 @@ public class JwtProvider {
                .setIssuedAt(now)
                .setExpiration(new Date(now.getTime() + REFRESH_TOKEN_EXPIRATION_TIME))
                .signWith(getSigningKey(), SignatureAlgorithm.HS256).compact();
+  }
+
+  public void validateToken(String token) throws JwtException, IllegalArgumentException {
+    getClaimsFromToken(token);
+  }
+
+  public String getSubjectFromToken(String token) {
+    return getClaimsFromToken(token).getSubject();
+  }
+
+  public String getRoleFromToken(String token) {
+    return getClaimsFromToken(token).get("role").toString();
+  }
+
+  private Claims getClaimsFromToken(String token) {
+    return Jwts.parserBuilder().setSigningKey(getSigningKey()).build()
+               .parseClaimsJws(token).getBody();
   }
 }
