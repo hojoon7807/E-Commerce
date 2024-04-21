@@ -1,5 +1,6 @@
 package com.example.project.application.user;
 
+import com.example.project.application.common.TwoWayEncryptor;
 import com.example.project.application.user.exception.DuplicatedEmailException;
 import com.example.project.application.user.usecase.OneWayEncryptor;
 import com.example.project.application.user.usecase.SignUpCommand;
@@ -21,22 +22,23 @@ public class SignUpService implements SignUpUseCase {
   private final UserRepository userRepository;
   private final AddressRepository addressRepository;
   private final OneWayEncryptor oneWayEncryptor;
+  private final TwoWayEncryptor twoWayEncryptor;
 
   @Override
   @Transactional
   public User apply(SignUpCommand signUpCommand) {
     // 이메일 중복 확인
-    checkEmailDuplicate(signUpCommand.email());
+    checkEmailDuplicate(twoWayEncryptor.encrypt(signUpCommand.email()));
 
     // 패스워드 암호화
     String encodedPassword = oneWayEncryptor.encode(signUpCommand.password());
     // 개인 정보 암호화
     // 유저, 주소 저장
     User user = User.builder()
-                    .email(signUpCommand.email())
+                    .email(twoWayEncryptor.encrypt(signUpCommand.email()))
                     .password(encodedPassword)
-                    .username(signUpCommand.username())
-                    .phoneNum(signUpCommand.phoneNum())
+                    .username(twoWayEncryptor.encrypt(signUpCommand.username()))
+                    .phoneNum(twoWayEncryptor.encrypt(signUpCommand.phoneNum()))
                     .userStatus(UserStatus.REQUEST_APPROVAL)
                     .userRole(UserRole.ROLE_BUYER)
                     .build();
@@ -44,9 +46,9 @@ public class SignUpService implements SignUpUseCase {
     User savedUser = userRepository.save(user);
 
     Address address = Address.builder()
-                             .zipcode(signUpCommand.zipcode())
-                             .addressMain(signUpCommand.addressMain())
-                             .addressSub(signUpCommand.addressSub())
+                             .zipcode(twoWayEncryptor.encrypt(signUpCommand.zipcode()))
+                             .addressMain(twoWayEncryptor.encrypt(signUpCommand.addressMain()))
+                             .addressSub(twoWayEncryptor.encrypt(signUpCommand.addressSub()))
                              .user(savedUser)
                              .build();
 
