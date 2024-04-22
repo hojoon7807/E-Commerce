@@ -46,6 +46,10 @@ public class User extends BaseTime {
     return userStatus.equals(UserStatus.APPROVED);
   }
 
+  public void changePassword(String newPassword) {
+    this.password = newPassword;
+  }
+
   @Builder
   public User(Long userId, String username, String password, String email, String phoneNum,
       UserRole userRole, UserStatus userStatus) {
