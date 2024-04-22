@@ -49,6 +49,7 @@ public class SignUpService implements SignUpUseCase {
                              .zipcode(twoWayEncryptor.encrypt(signUpCommand.zipcode()))
                              .addressMain(twoWayEncryptor.encrypt(signUpCommand.addressMain()))
                              .addressSub(twoWayEncryptor.encrypt(signUpCommand.addressSub()))
+                             .isDefault(true)
                              .user(savedUser)
                              .build();
 
