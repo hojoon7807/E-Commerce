@@ -1,6 +1,7 @@
 package com.example.project.application.user;
 
 import com.example.project.application.common.TwoWayEncryptor;
+import com.example.project.application.user.exception.UserNotFoundException;
 import com.example.project.application.user.usecase.GetMyPageUseCase;
 import com.example.project.application.user.usecase.MyPageInfo;
 import com.example.project.domain.user.model.Address;
@@ -28,7 +29,7 @@ public class GetMyPageService implements GetMyPageUseCase {
 
   private User findUser(Long userId) {
     return userRepository.findById(userId)
-                         .orElseThrow(() -> new IllegalArgumentException("User not found"));
+                         .orElseThrow(() -> new UserNotFoundException());
   }
 
   private User decryptUser(User user) {
