@@ -1,6 +1,6 @@
 package com.example.project.application.user;
 
-import com.example.project.application.user.exception.UserNotFoundException;
+import com.example.project.domain.user.exception.UserNotFoundException;
 import com.example.project.application.user.usecase.AddAddressCommand;
 import com.example.project.application.user.usecase.AddAddressUseCase;
 import com.example.project.domain.user.model.Address;

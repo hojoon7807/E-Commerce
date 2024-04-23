@@ -1,4 +1,4 @@
-package com.example.project.application.user.exception;
+package com.example.project.domain.user.exception;
 
 import com.example.project.presentation.common.error.ErrorCode;
 import lombok.Getter;
