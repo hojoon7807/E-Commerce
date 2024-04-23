@@ -1,6 +1,5 @@
 package com.example.project.application.user;
 
-import com.example.project.application.common.TwoWayEncryptor;
 import com.example.project.application.user.exception.AddressNotFoundException;
 import com.example.project.application.user.exception.UserMismatchException;
 import com.example.project.application.user.usecase.UpdateAddressCommand;
@@ -16,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class UpdateAddressService implements UpdateAddressUseCase {
 
   private final AddressRepository addressRepository;
-  private final TwoWayEncryptor twoWayEncryptor;
 
   @Override
   @Transactional
@@ -33,26 +31,16 @@ public class UpdateAddressService implements UpdateAddressUseCase {
     }
 
     address.updateAddress(
-        twoWayEncryptor.encrypt(command.zipcode()),
-        twoWayEncryptor.encrypt(command.addressMain()),
-        twoWayEncryptor.encrypt(command.addressSub()),
+        command.zipcode(),
+        command.addressMain(),
+        command.addressSub(),
         command.isDefault());
 
-    return decryptAddress(address);
+    return address;
   }
 
   private Address findAddress(Long addressId) {
     return addressRepository.findById(addressId)
                             .orElseThrow(AddressNotFoundException::new);
-  }
-
-  private Address decryptAddress(Address address) {
-    return Address.builder()
-                  .addressId(address.getAddressId())
-                  .zipcode(twoWayEncryptor.decrypt(address.getZipcode()))
-                  .addressMain(twoWayEncryptor.decrypt(address.getAddressMain()))
-                  .addressSub(twoWayEncryptor.decrypt(address.getAddressSub()))
-                  .isDefault(address.isDefault())
-                  .build();
   }
 }

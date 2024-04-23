@@ -1,6 +1,8 @@
 package com.example.project.domain.user.model;
 
+import com.example.project.domain.common.EncryptConverter;
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -26,13 +28,16 @@ public class Address {
   @JoinColumn(name = "user_id")
   private User user;
 
-  @Column(nullable = false, columnDefinition = "char(24)")
+  @Column(nullable = false, columnDefinition = "char(52)")
+  @Convert(converter = EncryptConverter.class)
   private String zipcode;
 
   @Column(nullable = false)
+  @Convert(converter = EncryptConverter.class)
   private String addressMain;
 
   @Column(nullable = false)
+  @Convert(converter = EncryptConverter.class)
   private String addressSub;
 
   @Column(nullable = false, columnDefinition = "tinyint(1)")
