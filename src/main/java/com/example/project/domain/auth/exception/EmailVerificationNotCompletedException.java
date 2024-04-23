@@ -1,4 +1,4 @@
-package com.example.project.application.auth.exception;
+package com.example.project.domain.auth.exception;
 
 import com.example.project.presentation.common.error.BusinessException;
 

@@ -1,7 +1,7 @@
 package com.example.project.application.user;
 
-import com.example.project.application.user.exception.AddressNotFoundException;
-import com.example.project.application.user.exception.UserMismatchException;
+import com.example.project.domain.user.exception.AddressNotFoundException;
+import com.example.project.domain.user.exception.UserMismatchException;
 import com.example.project.application.user.usecase.UpdateAddressCommand;
 import com.example.project.application.user.usecase.UpdateAddressUseCase;
 import com.example.project.domain.user.model.Address;

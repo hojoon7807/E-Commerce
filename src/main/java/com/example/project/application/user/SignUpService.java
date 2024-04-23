@@ -1,6 +1,6 @@
 package com.example.project.application.user;
 
-import com.example.project.application.user.exception.DuplicatedEmailException;
+import com.example.project.domain.user.exception.DuplicatedEmailException;
 import com.example.project.application.user.usecase.OneWayEncryptor;
 import com.example.project.application.user.usecase.SignUpCommand;
 import com.example.project.application.user.usecase.SignUpUseCase;

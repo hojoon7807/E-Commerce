@@ -1,7 +1,7 @@
 package com.example.project.application.auth;
 
-import com.example.project.application.auth.exception.EmailVerificationNotCompletedException;
-import com.example.project.application.auth.exception.LoginFailException;
+import com.example.project.domain.auth.exception.EmailVerificationNotCompletedException;
+import com.example.project.domain.auth.exception.LoginFailException;
 import com.example.project.application.auth.usecase.LoginCommand;
 import com.example.project.application.auth.usecase.LoginUseCase;
 import com.example.project.application.user.usecase.OneWayEncryptor;

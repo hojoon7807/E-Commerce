@@ -1,7 +1,7 @@
 package com.example.project.application.user;
 
-import com.example.project.application.user.exception.PasswordMismatchException;
-import com.example.project.application.user.exception.UserNotFoundException;
+import com.example.project.domain.user.exception.PasswordMismatchException;
+import com.example.project.domain.user.exception.UserNotFoundException;
 import com.example.project.application.user.usecase.ChangePasswordCommand;
 import com.example.project.application.user.usecase.ChangePasswordUseCase;
 import com.example.project.application.user.usecase.OneWayEncryptor;

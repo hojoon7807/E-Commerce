@@ -2,7 +2,7 @@ package com.example.project.infrastructure.security.handler;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-import com.example.project.application.auth.exception.AuthErrorCode;
+import com.example.project.domain.auth.exception.AuthErrorCode;
 import com.example.project.presentation.common.error.ErrorResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
