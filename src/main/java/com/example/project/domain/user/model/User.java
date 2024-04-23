@@ -1,7 +1,9 @@
 package com.example.project.domain.user.model;
 
+import com.example.project.domain.common.EncryptConverter;
 import com.example.project.domain.common.model.BaseTime;
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -22,7 +24,8 @@ public class User extends BaseTime {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long userId;
 
-  @Column(nullable = false, columnDefinition = "char(50)")
+  @Column(nullable = false, columnDefinition = "char(130)")
+  @Convert(converter = EncryptConverter.class)
   private String username;
 
   @Column(nullable = false)
@@ -31,7 +34,8 @@ public class User extends BaseTime {
   @Column(nullable = false)
   private String email;
 
-  @Column(nullable = false, columnDefinition = "char(24)")
+  @Column(nullable = false, columnDefinition = "char(60)")
+  @Convert(converter = EncryptConverter.class)
   private String phoneNum;
 
   @Column(nullable = false, columnDefinition = "varchar")
