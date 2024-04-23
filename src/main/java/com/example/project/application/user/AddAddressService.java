@@ -1,6 +1,5 @@
 package com.example.project.application.user;
 
-import com.example.project.application.common.TwoWayEncryptor;
 import com.example.project.application.user.exception.UserNotFoundException;
 import com.example.project.application.user.usecase.AddAddressCommand;
 import com.example.project.application.user.usecase.AddAddressUseCase;
@@ -17,15 +16,14 @@ public class AddAddressService implements AddAddressUseCase {
 
   private final AddressRepository addressRepository;
   private final UserRepository userRepository;
-  private final TwoWayEncryptor twoWayEncryptor;
 
   @Override
   public void accept(AddAddressCommand command) {
     User user = findUser(command.userId());
     Address address = Address.builder()
-                             .zipcode(twoWayEncryptor.encrypt(command.zipcode()))
-                             .addressMain(twoWayEncryptor.encrypt(command.addressMain()))
-                             .addressSub(twoWayEncryptor.encrypt(command.addressSub()))
+                             .zipcode(command.zipcode())
+                             .addressMain(command.addressMain())
+                             .addressSub(command.addressSub())
                              .isDefault(false)
                              .user(user)
                              .build();
