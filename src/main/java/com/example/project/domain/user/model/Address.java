@@ -38,6 +38,18 @@ public class Address {
   @Column(nullable = false, columnDefinition = "tinyint(1)")
   private boolean isDefault;
 
+  public boolean isSameUser(Long userId) {
+    return user.getUserId().equals(userId);
+  }
+
+  public void updateAddress(String zipcode, String addressMain, String addressSub,
+      boolean isDefault) {
+    this.zipcode = zipcode;
+    this.addressMain = addressMain;
+    this.addressSub = addressSub;
+    this.isDefault = isDefault;
+  }
+
   @Builder
   public Address(Long addressId, User user, String zipcode, String addressMain, String addressSub,
       boolean isDefault) {
