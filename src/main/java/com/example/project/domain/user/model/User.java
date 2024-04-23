@@ -54,6 +54,10 @@ public class User extends BaseTime {
     this.password = newPassword;
   }
 
+  public void updateUser(String phoneNum) {
+    this.phoneNum = phoneNum;
+  }
+
   @Builder
   public User(Long userId, String username, String password, String email, String phoneNum,
       UserRole userRole, UserStatus userStatus) {
