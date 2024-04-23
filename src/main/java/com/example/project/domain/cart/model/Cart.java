@@ -1,5 +1,6 @@
 package com.example.project.domain.cart.model;
 
+import com.example.project.domain.cart.exception.CartOverQuantityException;
 import com.example.project.domain.common.model.BaseTime;
 import com.example.project.domain.product.model.Product;
 import com.example.project.domain.user.model.User;
@@ -13,6 +14,7 @@ import jakarta.persistence.ManyToOne;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.userdetails.User.UserBuilder;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -41,5 +43,16 @@ public class Cart extends BaseTime {
     this.productQuantity = productQuantity;
     this.product = product;
     this.user = user;
+  }
+
+  public static class CartBuilder {
+
+    public CartBuilder productQuantity(int productQuantity) {
+      if (productQuantity > MAX_PRODUCT_QUANTITY) {
+        throw new CartOverQuantityException();
+      }
+      this.productQuantity = productQuantity;
+      return this;
+    }
   }
 }
