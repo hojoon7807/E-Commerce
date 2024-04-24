@@ -7,7 +7,9 @@ import lombok.RequiredArgsConstructor;
 public enum CartErrorCode implements ErrorCode {
 
   CART_OVER_QUANTITY("CT001", "수량은 최대 1000 입니다.", 400),
-  DUPLICATED_CART("CT002", "이미 해당 장바구니가 존재합니다.", 400);
+  DUPLICATED_CART("CT002", "이미 해당 장바구니가 존재합니다.", 400),
+  CART_NOT_FOUND("CT003", "해당 장바구니가 존재하지 않습니다.", 400),
+  CART_USER_MISMATCH("CT004", "유저 정보가 일치하지 않습니다.", 400);
 
   private final String code;
   private final String message;

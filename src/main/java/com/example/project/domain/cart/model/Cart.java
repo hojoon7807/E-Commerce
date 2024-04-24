@@ -1,11 +1,13 @@
 package com.example.project.domain.cart.model;
 
 import com.example.project.domain.cart.exception.CartOverQuantityException;
+import com.example.project.domain.cart.exception.CartUserMismatchException;
 import com.example.project.domain.common.model.BaseTime;
 import com.example.project.domain.product.model.Product;
 import com.example.project.domain.user.model.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -29,13 +31,19 @@ public class Cart extends BaseTime {
   @Column(nullable = false, columnDefinition = "smallint unsigned")
   private int productQuantity;
 
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "product_id")
   private Product product;
 
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "user_id")
   private User user;
+
+  public void validateUser(Long userId){
+    if(!this.user.getUserId().equals(userId)){
+      throw new CartUserMismatchException();
+    }
+  }
 
   @Builder
   public Cart(Long cartId, int productQuantity, Product product, User user) {
