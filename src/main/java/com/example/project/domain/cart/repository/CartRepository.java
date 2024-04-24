@@ -11,6 +11,6 @@ public interface CartRepository extends JpaRepository<Cart, Long> {
 
   boolean existsByUserAndProduct(User user, Product product);
 
-  @Query("select c from Cart c join fetch c.product where c.user.userId = :userId")
+  @Query("select c from Cart c join fetch c.product where c.user.userId = :userId order by c.modifiedAt")
   List<Cart> findAllByUserId(Long userId);
 }
