@@ -15,10 +15,12 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.userdetails.User.UserBuilder;
 
 @Entity
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Cart extends BaseTime {
 
@@ -39,10 +41,17 @@ public class Cart extends BaseTime {
   @JoinColumn(name = "user_id")
   private User user;
 
-  public void validateUser(Long userId){
-    if(!this.user.getUserId().equals(userId)){
+  public void validateUser(Long userId) {
+    if (!this.user.getUserId().equals(userId)) {
       throw new CartUserMismatchException();
     }
+  }
+
+  public void changeQuantity(int productQuantity) {
+    if (productQuantity > MAX_PRODUCT_QUANTITY) {
+      throw new CartOverQuantityException();
+    }
+    this.productQuantity = productQuantity;
   }
 
   @Builder
