@@ -23,5 +23,5 @@ CREATE TABLE IF NOT EXISTS address
     user_id      BIGINT UNSIGNED NOT NULL,
 
     PRIMARY KEY (address_id),
-    FOREIGN KEY (user_id) REFERENCES USER (user_id)
+    FOREIGN KEY (user_id) REFERENCES user (user_id)
 );
