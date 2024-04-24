@@ -2,6 +2,7 @@ package com.example.project.presentation.cart.dto.response;
 
 import com.example.project.domain.cart.model.Cart;
 import com.example.project.domain.product.model.ProductStatus;
+import java.time.LocalDateTime;
 
 public record GetAllCartResponse(
     Long cartId,
@@ -9,7 +10,8 @@ public record GetAllCartResponse(
     String productName,
     ProductStatus productStatus,
     int productQuantity,
-    int price
+    int price,
+    LocalDateTime modifiedAt
 ) {
 
   public static GetAllCartResponse of(Cart cart) {
@@ -19,6 +21,7 @@ public record GetAllCartResponse(
         cart.getProduct().getProductName(),
         cart.getProduct().getProductStatus(),
         cart.getProductQuantity(),
-        cart.getProduct().getPrice());
+        cart.getProduct().getPrice(),
+        cart.getModifiedAt());
   }
 }
