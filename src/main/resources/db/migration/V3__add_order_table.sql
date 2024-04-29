@@ -29,5 +29,5 @@ CREATE TABLE IF NOT EXISTS order_product
 
     PRIMARY KEY (order_product_id),
     FOREIGN KEY (product_id) REFERENCES product (product_id),
-    FOREIGN KEY (order_id) REFERENCES orders (user_id)
+    FOREIGN KEY (order_id) REFERENCES orders (order_id)
 );

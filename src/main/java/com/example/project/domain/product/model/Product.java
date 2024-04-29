@@ -46,6 +46,13 @@ public class Product extends BaseTime {
   @Column(nullable = false, columnDefinition = "int unsigned")
   private int stock;
 
+  public boolean hasStock(int orderQuantity) {
+    return stock >= orderQuantity;
+  }
+
+  public void decreaseStock(int orderQuantity) {
+    this.stock -= orderQuantity;
+  }
   @Builder
   public Product(Long productId, User user, String productName, String productContent,
       ProductStatus productStatus, int price, int stock) {
