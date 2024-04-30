@@ -2,6 +2,8 @@ package com.example.project.domain.order.model;
 
 import com.example.project.domain.common.EncryptConverter;
 import com.example.project.domain.common.model.BaseTime;
+import com.example.project.domain.order.exception.CanNotCancelOrderException;
+import com.example.project.domain.order.exception.OrderUserMismatchException;
 import com.example.project.domain.payment.Payment;
 import com.example.project.domain.user.model.User;
 import jakarta.persistence.Column;
@@ -78,5 +80,19 @@ public class Order extends BaseTime {
   public void updatePaymentComplete(Payment payment) {
     this.payment = payment;
     this.orderStatus = OrderStatus.PAYMENT_COMPLETE;
+  }
+
+  public void validateUser(Long userId) {
+    if (!this.user.getUserId().equals(userId)) {
+      throw new OrderUserMismatchException();
+    }
+  }
+
+  public void cancelOrder() {
+    if (!this.orderStatus.equals(OrderStatus.PAYMENT_COMPLETE)) {
+      throw new CanNotCancelOrderException();
+    }
+
+    this.orderStatus = OrderStatus.CANCELED;
   }
 }

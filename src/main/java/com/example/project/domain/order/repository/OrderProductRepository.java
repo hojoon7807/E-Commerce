@@ -9,4 +9,7 @@ public interface OrderProductRepository extends JpaRepository<OrderProduct, Long
 
   @Query("select op from OrderProduct op where op.order.orderId = :orderId")
   List<OrderProduct> findAllByOrderId(Long orderId);
+
+  @Query("select op from OrderProduct op join fetch op.product where op.order.orderId = :orderId")
+  List<OrderProduct> findAllWithProductByOrderId(Long orderId);
 }
