@@ -5,6 +5,7 @@ import com.example.project.domain.product.model.Product;
 import com.example.project.domain.user.model.User;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 public interface CartRepository extends JpaRepository<Cart, Long> {
@@ -16,4 +17,8 @@ public interface CartRepository extends JpaRepository<Cart, Long> {
 
   @Query("select c from Cart c join fetch c.product where c.cartId in :cartIds")
   List<Cart> findAllInCartIds(List<Long> cartIds);
+
+  @Modifying
+  @Query("delete from Cart c where c.user.userId = :userId and c.product.productId in :productIds")
+  void deleteAllCompletedOrder(Long userId, List<Long> productIds);
 }
