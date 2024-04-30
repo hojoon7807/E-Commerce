@@ -2,6 +2,7 @@ package com.example.project.domain.order.model;
 
 import com.example.project.domain.common.EncryptConverter;
 import com.example.project.domain.common.model.BaseTime;
+import com.example.project.domain.payment.Payment;
 import com.example.project.domain.user.model.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
@@ -14,6 +15,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.util.UUID;
 import lombok.AccessLevel;
@@ -68,4 +70,13 @@ public class Order extends BaseTime {
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "user_id", nullable = false)
   private User user;
+
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "payment_id")
+  private Payment payment;
+
+  public void updatePaymentComplete(Payment payment) {
+    this.payment = payment;
+    this.orderStatus = OrderStatus.PAYMENT_COMPLETE;
+  }
 }
