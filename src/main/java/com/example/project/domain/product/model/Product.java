@@ -53,6 +53,11 @@ public class Product extends BaseTime {
   public void decreaseStock(int orderQuantity) {
     this.stock -= orderQuantity;
   }
+
+  public void restoreStock(int quantity) {
+    this.stock += quantity;
+  }
+
   @Builder
   public Product(Long productId, User user, String productName, String productContent,
       ProductStatus productStatus, int price, int stock) {

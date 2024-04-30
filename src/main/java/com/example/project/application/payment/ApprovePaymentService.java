@@ -53,7 +53,7 @@ public class ApprovePaymentService implements ApprovePaymentUseCase {
 
 
   private Order findOrder(UUID orderNum) {
-    return orderRepository.findAllByOrderNum(orderNum).orElseThrow(OrderNotFoundException::new);
+    return orderRepository.findByOrderNum(orderNum).orElseThrow(OrderNotFoundException::new);
   }
 
   private void removeCarts(Long userId, Long orderId) {
