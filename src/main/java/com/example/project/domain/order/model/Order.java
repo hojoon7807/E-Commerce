@@ -3,6 +3,7 @@ package com.example.project.domain.order.model;
 import com.example.project.domain.common.EncryptConverter;
 import com.example.project.domain.common.model.BaseTime;
 import com.example.project.domain.order.exception.CanNotCancelOrderException;
+import com.example.project.domain.order.exception.CanNotRefundOrderException;
 import com.example.project.domain.order.exception.OrderUserMismatchException;
 import com.example.project.domain.payment.Payment;
 import com.example.project.domain.user.model.User;
@@ -19,6 +20,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.UUID;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -94,5 +97,16 @@ public class Order extends BaseTime {
     }
 
     this.orderStatus = OrderStatus.CANCELED;
+  }
+
+  public void refundRequest() {
+    LocalDate now = LocalDate.now();
+    Period between = Period.between(this.getModifiedAt().toLocalDate(), now);
+
+    if (!this.orderStatus.equals(OrderStatus.DELIVERED) || between.getDays() > 1) {
+      throw new CanNotRefundOrderException();
+    }
+
+    this.orderStatus = OrderStatus.REFUND_REQUEST;
   }
 }
