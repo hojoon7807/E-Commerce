@@ -11,7 +11,8 @@ public enum OrderErrorCode implements ErrorCode {
   ORDER_CART_INVALID("OP003", "카트가 유효하지 않습니다.", 400),
   ORDER_NOT_FOUND("OP004", "주문을 찾을 수 없습니다.", 400),
   ORDER_USER_MISMATCH ("OP005", "주문자가 다릅니다.", 400),
-  CAN_NOT_CANCEL_ORDER("OP006", "주문을 취소할 수 없습니다.", 400);
+  CAN_NOT_CANCEL_ORDER("OP006", "주문을 취소할 수 없습니다.", 400),
+  CAN_NOT_REFUND_ORDER("OP007", "주문을 반품할 수 없습니다.", 400);
 
   private final String code;
   private final String message;
